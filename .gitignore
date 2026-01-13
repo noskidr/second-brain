@@ -1,0 +1,15 @@
+# System files
+.DS_Store
+*.swp
+*.swo
+
+# Cache
+.claude/tsc-cache/
+
+# Logs (keep structure, ignore content)
+asana_daily_summary/cron.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
