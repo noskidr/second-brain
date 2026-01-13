@@ -13,3 +13,6 @@ asana_daily_summary/cron.log
 __pycache__/
 *.pyc
 .venv/
+
+# Conversation threads
+conversation_threads/
