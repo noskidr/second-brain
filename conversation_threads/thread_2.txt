@@ -1,0 +1,2072 @@
+
+╭─── Claude Code v2.1.6 ───────────────────────────────────────────────────────╮
+│                                              │ Tips for getting started      │
+│             Welcome back Dikson!             │ Run /init to create a CLAUDE… │
+│                                              │ ───────────────────────────── │
+│                   ▗ ▗   ▖ ▖                  │ Recent activity               │
+│                                              │ No recent activity            │
+│                     ▘▘ ▝▝                    │                               │
+│                                              │                               │
+│   Opus 4.5 · Claude Max · Dikson Rajbanshi   │                               │
+│             ~/Work/second_brain              │                               │
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ⎿  SessionStart:clear hook error
+
+❯ /clear 
+  ⎿  (no content)
+
+❯ Give me a summary of the ticket movements, assignment details, comments   
+  and updates to the tasks in Ideon Scraping Internal board. Always incldue 
+  the action user for this.                                                 
+  ⎿  Interrupted · What should Claude do instead?
+
+❯ Give me a summary of the ticket movements, assignment details, comments   
+  and updates to the tasks in Ideon Scraping Internal board. Always incldue 
+  the action user for this. Use the asana skill                             
+
+⏺ Skill(asana)
+  ⎿  Successfully loaded skill · 3 tools allowed
+
+⏺ I'll get the summary of ticket movements and activities from the "Ideon Scraping Internal" board. Let me start by finding the workspace and project.
+
+⏺ Bash(curl -s "https://app.asana.com/api/1.0/workspaces" -H "Authorization:
+      Bearer $ASANA_ACCESS_TOKEN" | jq '.data[] | {gid, name}')
+  ⎿  Error: Exit code 5
+     jq: error (at <stdin>:0): Cannot iterate over null (null)
+
+⏺ Let me check if the Asana token is configured.
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null; curl -s
+      "https://app.asana.com/api/1.0/workspaces" -H "Authorization: Bearer
+      $ASANA_ACCESS_TOKEN" | jq '.data[] | {gid, name}…)
+  ⎿  Error: Exit code 5
+     jq: error (at <stdin>:0): Cannot iterate over null (null)
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null; curl -s
+      "https://app.asana.com/api/1.0/workspaces" -H "Authorization: Bearer
+      $ASANA_ACCESS_TOKEN")
+  ⎿  {                            
+       "data": [
+         {
+     … +6 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Found the workspace. Now let me find the "Ideon Scraping Internal" project.
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null; curl -s
+      "https://app.asana.com/api/1.0/workspaces/1200807498271803/projects" -H
+      "Authorization: Bearer $ASANA_ACCESS_TOKEN" |…)
+  ⎿  Error: Exit code 5
+     jq: error (at <stdin>:0): Cannot iterate over null (null)
+  ⎿  Interrupted · What should Claude do instead?
+
+❯ This is for the last 24 hours only. 
+
+⏺ Let me get the project and recent activity from the last 24 hours.
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null; curl -s "https://app.asana.com/api/1.0
+      /workspaces/1200807498271803/projects?opt_fields=name,gid" -H
+      "Authorization: Bearer $A…)
+  ⎿  {                             
+       "data": [
+         {
+     … +89 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Found the project (gid: 1208639428824137). Now let me get the tasks and their recent activity.
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null; curl -s
+      "https://app.asana.com/api/1.0/projects/1208639428824137/tasks?opt_fields=
+      gid,name,assignee.name,completed,created_at…)
+  ⎿  {                                
+       "data": [
+         {
+     … +14914 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Let me search for tasks modified in the last 24 hours and get their activity stories.
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null;
+      # Get date 24 hours ago…)
+  ⎿  Looking for activity since: 2026-01-12T09:03:14Z
+     {
+       "data": [
+     … +632 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Now let me get the activity stories for these recently modified tasks to see the actual movements and who performed them.
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null;…)
+  ⎿ === Task: 1212618791292519 1212535937982746 1212535937045752         
+    1212706685
+    009654 1212622575588344 1212535937892703 1212508031097105
+    1212271638681
+    083 1212333570210832 1212660801969900 1212508031090131
+    1212654566143789
+     ===
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null;
+      SINCE=$(date -v-24H -u +"%Y-%m-%dT%H:%M:%SZ")…)
+  ⎿  === Task GID: 1212618791292519 ===         
+     {
+       "created_at": "2026-01-12T09:30:47.602Z",
+     … +213 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Let me get a few more tasks with comments and then compile the summary.
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null;
+      SINCE=$(date -v-24H -u +"%Y-%m-%dT%H:%M:%SZ")…)
+  ⎿  1212618791292519: BCBS MA               
+     1212535937982746: BCBS TX
+     1212535937045752: Baylor Scott and White
+     … +9 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Ideon Scraping Internal - Last 24 Hours Activity Summary
+
+  Ticket Movements (Section Changes)
+  ┌───────────────────┬──────────────┬───────────────┬─────────────┬──────────┐
+  │       Task        │     From     │      To       │ Action User │   Time   │
+  ├───────────────────┼──────────────┼───────────────┼─────────────┼──────────┤
+  │ BCBS MA           │ Scraping     │ QA            │ Dikson      │ Jan 13,  │
+  │                   │              │               │ Rajbanshi   │ 08:55    │
+  ├───────────────────┼──────────────┼───────────────┼─────────────┼──────────┤
+  │ BCBS TX           │ QA           │ Submitted     │ Dikson      │ Jan 13,  │
+  │                   │              │               │ Rajbanshi   │ 08:41    │
+  ├───────────────────┼──────────────┼───────────────┼─────────────┼──────────┤
+  │ Baylor Scott and  │ QA Fixes in  │ Internal      │ Rohit       │ Jan 13,  │
+  │ White             │ Progress     │ Approved      │ Dangol      │ 08:40    │
+  ├───────────────────┼──────────────┼───────────────┼─────────────┼──────────┤
+  │ Baylor Scott and  │ QA Error     │ QA Fixes in   │ Rohit       │ Jan 13,  │
+  │ White             │              │ Progress      │ Dangol      │ 03:31    │
+  ├───────────────────┼──────────────┼───────────────┼─────────────┼──────────┤
+  │ Baylor Scott and  │ QA Check in  │ QA Error      │ Asim        │ Jan 12,  │
+  │ White             │ Progress     │               │ Adhikari    │ 10:50    │
+  ├───────────────────┼──────────────┼───────────────┼─────────────┼──────────┤
+  │ Baylor Scott and  │ QA           │ QA Check in   │ Asim        │ Jan 12,  │
+  │ White             │              │ Progress      │ Adhikari    │ 10:31    │
+  ├───────────────────┼──────────────┼───────────────┼─────────────┼──────────┤
+  │ Anthem            │ To do        │ Scraping      │ Rohit       │ Jan 13,  │
+  │                   │              │               │ Dangol      │ 08:27    │
+  ├───────────────────┼──────────────┼───────────────┼─────────────┼──────────┤
+  │ UPMC              │ To do        │ Coding        │ Asim        │ Jan 13,  │
+  │                   │              │               │ Adhikari    │ 05:49    │
+  ├───────────────────┼──────────────┼───────────────┼─────────────┼──────────┤
+  │ QualCare          │ QA Error     │ QA Fixes in   │ Rohit       │ Jan 13,  │
+  │                   │              │ Progress      │ Dangol      │ 03:27    │
+  ├───────────────────┼──────────────┼───────────────┼─────────────┼──────────┤
+  │ Emblem Health     │ Scraping     │ Scrape Error  │ Dikson      │ Jan 12,  │
+  │                   │              │               │ Rajbanshi   │ 10:08    │
+  ├───────────────────┼──────────────┼───────────────┼─────────────┼──────────┤
+  │ Aetna Better      │              │               │ Rohit       │ Jan 12,  │
+  │ Health of         │ Scraping     │ Scrape Error  │ Dangol      │ 10:08    │
+  │ Oklahoma          │              │               │             │          │
+  ├───────────────────┼──────────────┼───────────────┼─────────────┼──────────┤
+  │ Mainecare -       │ Scrape Error │ Scraping      │ Rohit       │ Jan 12,  │
+  │ Medicaid site     │              │               │ Dangol      │ 14:37    │
+  └───────────────────┴──────────────┴───────────────┴─────────────┴──────────┘
+  ---
+  Assignment Changes
+  ┌───────────────────┬────────────┬─────────────┬───────────────┬────────────┐
+  │       Task        │   Action   │ Assigned To │  Action User  │    Time    │
+  ├───────────────────┼────────────┼─────────────┼───────────────┼────────────┤
+  │ BCBS MA           │ Assigned   │ Rohit       │ Dikson        │ Jan 13,    │
+  │                   │            │ Dangol      │ Rajbanshi     │ 08:55      │
+  ├───────────────────┼────────────┼─────────────┼───────────────┼────────────┤
+  │ Baylor Scott and  │ Assigned   │ Rohit       │ Asim Adhikari │ Jan 12,    │
+  │ White             │            │ Dangol      │               │ 10:50      │
+  ├───────────────────┼────────────┼─────────────┼───────────────┼────────────┤
+  │ Sentara Health    │ Assigned   │ Pramod      │ Rohit Dangol  │ Jan 13,    │
+  │ Plans             │            │ Phuyal      │               │ 04:02      │
+  ├───────────────────┼────────────┼─────────────┼───────────────┼────────────┤
+  │ QualCare          │ Unassigned │ Pramod      │ Rohit Dangol  │ Jan 13,    │
+  │                   │            │ Phuyal      │               │ 03:37      │
+  ├───────────────────┼────────────┼─────────────┼───────────────┼────────────┤
+  │ Baylor Scott and  │ Unassigned │ -           │ Rohit Dangol  │ Jan 13,    │
+  │ White             │            │             │               │ 03:37      │
+  └───────────────────┴────────────┴─────────────┴───────────────┴────────────┘
+  ---
+  Comments Added
+  ┌────────────┬───────────┬─────────────────────────────────────────┬─────────┐
+  │    Task    │   User    │                 Comment                 │  Time   │
+  ├────────────┼───────────┼─────────────────────────────────────────┼─────────┤
+  │ Baylor     │           │ "Network error seen, false drop:        │         │
+  │ Scott and  │ Asim      │ Commercial - BSW Plus HMO-Group. 7/10   │ Jan 12, │
+  │ White      │ Adhikari  │ false NPI drops..." (with Google Sheet  │  10:50  │
+  │            │           │ link)                                   │         │
+  ├────────────┼───────────┼─────────────────────────────────────────┼─────────┤
+  │ Baylor     │ Rohit     │ Screenshot uploaded + "First File       │ Jan 13, │
+  │ Scott and  │ Dangol    │ Created = 09/01/2026, Last File Created │  08:36  │
+  │ White      │           │  = 13/01/2026"                          │         │
+  ├────────────┼───────────┼─────────────────────────────────────────┼─────────┤
+  │ BCBS MT    │ Pramod    │ "Updated base sapphire module, Should   │ Jan 12, │
+  │            │ Phuyal    │ be working good."                       │  11:51  │
+  └────────────┴───────────┴─────────────────────────────────────────┴─────────┘
+  ---
+  Custom Field Updates
+  ┌────────────┬────────────┬──────────────────────┬───────────────┬───────────┐
+  │    Task    │   Field    │      New Value       │  Action User  │   Time    │
+  ├────────────┼────────────┼──────────────────────┼───────────────┼───────────┤
+  │ BCBS MA    │ Scrape PC  │ PC1                  │ Rohit Dangol  │ Jan 12,   │
+  │            │            │                      │               │ 09:30     │
+  ├────────────┼────────────┼──────────────────────┼───────────────┼───────────┤
+  │ BCBS MA    │ Project    │ audiobee_bcbs_ma     │ Rohit Dangol  │ Jan 12,   │
+  │            │ Name       │                      │               │ 09:30     │
+  ├────────────┼────────────┼──────────────────────┼───────────────┼───────────┤
+  │ Anthem     │ Scrape PC  │ PC2, PC3             │ Rohit Dangol  │ Jan 13,   │
+  │            │            │                      │               │ 08:32     │
+  ├────────────┼────────────┼──────────────────────┼───────────────┼───────────┤
+  │ Emblem     │ Scrape PC  │ PC1, PC2 (from PC1,  │ Dikson        │ Jan 12,   │
+  │ Health     │            │ PC3)                 │ Rajbanshi     │ 10:08     │
+  ├────────────┼────────────┼──────────────────────┼───────────────┼───────────┤
+  │ UPMC       │ Due date   │ Saturday             │ Asim Adhikari │ Jan 13,   │
+  │            │            │                      │               │ 05:49     │
+  └────────────┴────────────┴──────────────────────┴───────────────┴───────────┘
+  ---
+  Active Users (Last 24 Hours)
+  User: Rohit Dangol
+  Actions: 12 actions (moves, assignments, comments, field updates)
+  ────────────────────────────────────────
+  User: Dikson Rajbanshi
+  Actions: 5 actions (moves, assignments, field updates)
+  ────────────────────────────────────────
+  User: Asim Adhikari
+  Actions: 6 actions (moves, assignments, comments, field updates)
+  ────────────────────────────────────────
+  User: Pramod Phuyal
+  Actions: 1 action (comment)
+
+✻ Cooked for 1m 23s
+
+❯ summaize this 
+
+⏺ Summary - Ideon Scraping Internal (Last 24 Hours)
+
+  12 tasks had activity across 4 active users.
+
+  Key Highlights
+
+  Completed/Approved:
+  - Baylor Scott and White → Internal Approved (Rohit Dangol fixed QA errors)
+
+  Progressing:
+  - BCBS MA → moved to QA (by Dikson)
+  - BCBS TX → moved to Submitted (by Dikson)
+  - Anthem → started Scraping (by Rohit)
+  - UPMC → moved to Coding (by Asim, due Saturday)
+
+  Issues Found:
+  - Emblem Health → Scrape Error (by Dikson)
+  - Aetna Better Health of Oklahoma → Scrape Error (by Rohit)
+
+  Fixes In Progress:
+  - QualCare → QA Fixes in Progress (by Rohit)
+  - Mainecare → back to Scraping after error fix (by Rohit)
+  - BCBS MT → Pramod updated sapphire module
+
+  User Activity
+  ┌──────────────────┬─────────┐
+  │       User       │ Actions │
+  ├──────────────────┼─────────┤
+  │ Rohit Dangol     │ 12      │
+  ├──────────────────┼─────────┤
+  │ Asim Adhikari    │ 6       │
+  ├──────────────────┼─────────┤
+  │ Dikson Rajbanshi │ 5       │
+  ├──────────────────┼─────────┤
+  │ Pramod Phuyal    │ 1       │
+  └──────────────────┴─────────┘
+
+❯ Look at the board and suggest what fields would be better for a daily     
+  summary.                                                                  
+
+⏺ Let me examine the board structure, sections, and custom fields.
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null;…)
+  ⎿  {                              
+       "data": {
+         "gid": "1208639428824137",
+     … +153 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null;…)
+  ⎿  {                             
+       "gid": "1208639428824138",
+       "name": "To do"
+     … +45 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Based on the board structure, here are my suggestions:
+
+  ---
+  Current Board Structure
+
+  Sections (Pipeline):
+  To do → Coding → Scraping → Scrape Error
+                      ↓
+                     QA → QA Check in Progress → QA Error → QA Fixes in Progress
+                                                                ↓
+                                                Internal Approved → Submitted → Approved
+
+  Hold/Cancelled (separate track)
+
+  Custom Fields:
+  Field: Has NPI?
+  Type: Enum
+  Values: Y, N
+  ────────────────────────────────────────
+  Field: Line of Coverage(s)
+  Type: Multi-enum
+  Values: Medicare Advantage, Medicaid, ACA, Large Group
+  ────────────────────────────────────────
+  Field: URL
+  Type: Text
+  Values: -
+  ────────────────────────────────────────
+  Field: State
+  Type: Text
+  Values: -
+  ────────────────────────────────────────
+  Field: Frequency
+  Type: Enum
+  Values: Monthly, Quarterly, Bi-Monthly
+  ────────────────────────────────────────
+  Field: Start Date
+  Type: Date
+  Values: -
+  ────────────────────────────────────────
+  Field: Submitted Date
+  Type: Date
+  Values: -
+  ────────────────────────────────────────
+  Field: Project Name
+  Type: Text
+  Values: -
+  ────────────────────────────────────────
+  Field: Scrape PC
+  Type: Multi-enum
+  Values: PC1, PC2, PC3, Dikson Laptop, Rohit Laptop, Server 1, Server 2
+  ---
+  Recommended Daily Summary Fields
+
+  1. Pipeline Status Counts (most useful)
+
+  To do: 5 | Coding: 2 | Scraping: 8 | Scrape Error: 3
+  QA: 4 | QA Error: 2 | QA Fixes: 1
+  Internal Approved: 3 | Submitted: 6 | Approved: 12
+
+  2. Throughput Metrics
+
+  - Tasks moved to Submitted today (completed work)
+  - Tasks moved to Approved today (client approved)
+  - Tasks moved to Error states (blockers)
+
+  3. Assignee Workload
+
+  - Tasks per person in active stages (Scraping, QA, Fixes)
+  - Who is blocked (tasks in Error states)
+
+  4. PC/Server Utilization (from Scrape PC field)
+
+  - Which machines are running scrapes
+  - Available capacity
+
+  5. Aging/SLA Tracking (missing - recommend adding)
+
+  Consider adding:
+  - Days in Stage - how long task has been in current section
+  - Target Due Date - when scrape should complete
+  - Priority field - High/Medium/Low
+
+  6. Error Summary
+
+  - Count of Scrape Errors vs QA Errors
+  - Tasks stuck in error states > 24 hours
+
+  ---
+  Suggested Daily Summary Format
+
+  📊 DAILY SUMMARY - Ideon Scraping Internal
+  Date: Jan 13, 2026
+
+  PIPELINE STATUS
+  ───────────────
+  Backlog:    To do (5) → Coding (2)
+  Active:     Scraping (8) → QA (4)
+  Blocked:    Scrape Error (3) | QA Error (2) | QA Fixes (1)
+  Done Today: Internal Approved (3) → Submitted (+2) → Approved (+1)
+
+  TODAY'S MOVEMENTS
+  ─────────────────
+  ✅ Completed: 2 tasks submitted
+  ⚠️ Errors:    2 new (Emblem Health, Aetna)
+  🔄 Fixed:     1 returned to Scraping (Mainecare)
+
+  TEAM ACTIVITY
+  ─────────────
+  Rohit Dangol:     12 actions (most active)
+  Asim Adhikari:    6 actions
+  Dikson Rajbanshi: 5 actions
+
+  RESOURCE USAGE
+  ──────────────
+  PC1: 3 tasks | PC2: 4 tasks | PC3: 2 tasks
+  Server 1: idle | Server 2: 1 task
+
+  BLOCKERS NEEDING ATTENTION
+  ──────────────────────────
+  • Emblem Health - Scrape Error (assigned: Pramod)
+  • BCBS MT - QA Error > 24hrs
+
+  ---
+  Missing Fields to Consider Adding
+  ┌──────────────────────┬─────────────────────────────────────────────────┐
+  │        Field         │                     Purpose                     │
+  ├──────────────────────┼─────────────────────────────────────────────────┤
+  │ Priority             │ High/Medium/Low - which tasks to focus on       │
+  ├──────────────────────┼─────────────────────────────────────────────────┤
+  │ Blocker Reason       │ Dropdown: Captcha, Site Down, Data Format, etc. │
+  ├──────────────────────┼─────────────────────────────────────────────────┤
+  │ Time in Stage        │ Auto-calculated days since last move            │
+  ├──────────────────────┼─────────────────────────────────────────────────┤
+  │ Estimated Completion │ When task should finish                         │
+  └──────────────────────┴─────────────────────────────────────────────────┘
+  Would you like me to create a script that generates this daily summary format automatically?
+
+✻ Crunched for 33s
+
+❯ To do column is not so important in this case.                            
+                                                                            
+  Key Highlights                                                            
+                                                                            
+  Completed/Approved:                                                       
+  - Baylor Scott and White → Internal Approved (Rohit Dangol fixed QA       
+  errors)                                                                   
+                                                                            
+  Progressing:                                                              
+  - BCBS MA → moved to QA (by Dikson)                                       
+  - BCBS TX → moved to Submitted (by Dikson)                                
+  - Anthem → started Scraping (by Rohit)                                    
+  - UPMC → moved to Coding (by Asim, due Saturday)                          
+                                                                            
+  Issues Found:                                                             
+  - Emblem Health → Scrape Error (by Dikson)                                
+  - Aetna Better Health of Oklahoma → Scrape Error (by Rohit)               
+                                                                            
+  Fixes In Progress:                                                        
+  - QualCare → QA Fixes in Progress (by Rohit)                              
+  - Mainecare → back to Scraping after error fix (by Rohit)                 
+  - BCBS MT → Pramod updated sapphire module                                
+                                                                            
+  User Activity                                                             
+  ┌──────────────────┬─────────┐                                            
+  │       User       │ Actions │                                            
+  ├──────────────────┼─────────┤                                            
+  │ Rohit Dangol     │ 12      │                                            
+  ├──────────────────┼─────────┤                                            
+  │ Asim Adhikari    │ 6       │                                            
+  ├──────────────────┼─────────┤                                            
+  │ Dikson Rajbanshi │ 5       │                                            
+  ├──────────────────┼─────────┤                                            
+  │ Pramod Phuyal    │ 1       │ These are also important                   
+
+⏺ Got it. Based on your feedback, here's the refined daily summary structure:
+
+  Recommended Daily Summary Fields
+
+  Priority Fields (High Value)
+  Category: Completed/Approved
+  What to Track: Tasks reaching Internal Approved, Submitted, Approved
+  Why Important: Shows output/throughput
+  ────────────────────────────────────────
+  Category: Progressing
+  What to Track: Tasks moving forward (→ Coding, → Scraping, → QA)
+  Why Important: Shows active work
+  ────────────────────────────────────────
+  Category: Issues Found
+  What to Track: Tasks moved to Scrape Error or QA Error
+  Why Important: Blockers needing attention
+  ────────────────────────────────────────
+  Category: Fixes In Progress
+  What to Track: Tasks in QA Fixes, returning from errors
+  Why Important: Recovery status
+  ────────────────────────────────────────
+  Category: User Activity
+  What to Track: Action count per user
+  Why Important: Workload & accountability
+  Skip These
+
+  - To do count - backlog noise, not actionable daily
+  - Hold/Cancelled - static, review weekly instead
+
+  ---
+  Ideal Daily Summary Format
+
+  📊 Ideon Scraping Internal - Jan 13, 2026
+
+  ✅ COMPLETED/APPROVED
+     • Baylor Scott and White → Internal Approved (Rohit Dangol)
+
+  🔄 PROGRESSING
+     • BCBS MA → QA (Dikson Rajbanshi)
+     • BCBS TX → Submitted (Dikson Rajbanshi)
+     • Anthem → Scraping (Rohit Dangol)
+     • UPMC → Coding (Asim Adhikari) - due Saturday
+
+  ⚠️ ISSUES FOUND
+     • Emblem Health → Scrape Error (Dikson Rajbanshi)
+     • Aetna Better Health of Oklahoma → Scrape Error (Rohit Dangol)
+
+  🔧 FIXES IN PROGRESS
+     • QualCare → QA Fixes in Progress (Rohit Dangol)
+     • Mainecare → back to Scraping (Rohit Dangol)
+     • BCBS MT → module updated (Pramod Phuyal)
+
+  👥 USER ACTIVITY
+     Rohit Dangol      12 actions
+     Asim Adhikari      6 actions
+     Dikson Rajbanshi   5 actions
+     Pramod Phuyal      1 action
+
+  ---
+  Key Metrics to Extract
+
+  1. Section transitions (from stories API) - who moved what, when
+  2. Assignee - who's responsible
+  3. Comments - context on fixes/issues
+  4. Due dates - upcoming deadlines
+
+  Want me to create a script that auto-generates this summary format daily?
+
+❯ Add workload distribution. ALso, add deadline passed along with days 
+
+⏺ Let me fetch the workload distribution and overdue tasks.
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null;…)
+  ⎿  [                              
+       {
+         "assignee": null,
+     … +458 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null;…)
+  ⎿  Today: 2026-01-13             
+     [
+       {
+     … +42 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Here's the updated summary format with workload distribution and overdue tasks:
+
+  ---
+  Updated Daily Summary Format
+
+  📊 Ideon Scraping Internal - Jan 13, 2026
+
+  ✅ COMPLETED/APPROVED
+     • Baylor Scott and White → Internal Approved (Rohit Dangol)
+
+  🔄 PROGRESSING
+     • BCBS MA → QA (Dikson Rajbanshi)
+     • BCBS TX → Submitted (Dikson Rajbanshi)
+     • Anthem → Scraping (Rohit Dangol)
+     • UPMC → Coding (Asim Adhikari) - due Jan 17
+
+  ⚠️ ISSUES FOUND
+     • Emblem Health → Scrape Error (Dikson Rajbanshi)
+     • Aetna Better Health of Oklahoma → Scrape Error (Rohit Dangol)
+
+  🔧 FIXES IN PROGRESS
+     • QualCare → QA Fixes in Progress (Rohit Dangol)
+     • Mainecare → back to Scraping (Rohit Dangol)
+     • BCBS MT → module updated (Pramod Phuyal)
+
+  🚨 OVERDUE TASKS
+     • QualCare (QA Fixes) - 11 days overdue ⚠️ Unassigned
+     • BCBS MT (QA Error) - 9 days overdue → Pramod Phuyal
+     • BlueshieldCA (Submitted) - 7 days overdue ⚠️ Unassigned
+     • Independence (Scraping) - 3 days overdue → Pramod Phuyal
+     • CareFirst (Scraping) - 3 days overdue → Dikson Rajbanshi
+     • Sentara Health Plans (Scraping) - 2 days overdue → Pramod Phuyal
+     • Aetna Better Health (Scrape Error) - 2 days overdue → Pramod Phuyal
+
+  📋 WORKLOAD DISTRIBUTION (Active Tasks)
+     ┌──────────────────┬───────┬─────────────────────────────────┐
+     │ Assignee         │ Tasks │ Breakdown                       │
+     ├──────────────────┼───────┼─────────────────────────────────┤
+     │ Pramod Phuyal    │   6   │ 2 Scraping, 2 Scrape Error,     │
+     │                  │       │ 2 QA Error                      │
+     ├──────────────────┼───────┼─────────────────────────────────┤
+     │ Dikson Rajbanshi │   2   │ 1 Coding, 1 Scraping            │
+     ├──────────────────┼───────┼─────────────────────────────────┤
+     │ Rohit Dangol     │   1   │ 1 QA                            │
+     ├──────────────────┼───────┼─────────────────────────────────┤
+     │ ⚠️ Unassigned    │   8   │ 1 Coding, 3 Scraping,           │
+     │                  │       │ 1 QA Fixes, 1 Internal Approved,│
+     │                  │       │ 2 Submitted                     │
+     └──────────────────┴───────┴─────────────────────────────────┘
+
+  👥 USER ACTIVITY (Last 24h)
+     Rohit Dangol       12 actions
+     Asim Adhikari       6 actions
+     Dikson Rajbanshi    5 actions
+     Pramod Phuyal       1 action
+
+  ---
+  Key Observations
+  ┌───────────────────┬────────────────────┬─────────────────────┐
+  │       Issue       │       Count        │    Action Needed    │
+  ├───────────────────┼────────────────────┼─────────────────────┤
+  │ Overdue tasks     │ 7                  │ Need prioritization │
+  ├───────────────────┼────────────────────┼─────────────────────┤
+  │ Unassigned active │ 8                  │ Need assignment     │
+  ├───────────────────┼────────────────────┼─────────────────────┤
+  │ Pramod overloaded │ 6 tasks (4 errors) │ May need help       │
+  ├───────────────────┼────────────────────┼─────────────────────┤
+  │ Oldest overdue    │ QualCare (11 days) │ Urgent attention    │
+  └───────────────────┴────────────────────┴─────────────────────┘
+  Want me to create a script that generates this daily summary automatically?
+
+✻ Cooked for 36s
+
+❯ Tasks in submitted doesnt need to be in Overdue 
+
+⏺ Good point - once tasks are in Submitted, they're waiting for external approval, so due dates don't apply.
+
+  Updated OVERDUE TASKS Section
+
+  🚨 OVERDUE TASKS (Excludes Submitted/Approved)
+     • QualCare (QA Fixes) - 11 days overdue ⚠️ Unassigned
+     • BCBS MT (QA Error) - 9 days overdue → Pramod Phuyal
+     • Independence (Scraping) - 3 days overdue → Pramod Phuyal
+     • CareFirst (Scraping) - 3 days overdue → Dikson Rajbanshi
+     • Sentara Health Plans (Scraping) - 2 days overdue → Pramod Phuyal
+     • Aetna Better Health (Scrape Error) - 2 days overdue → Pramod Phuyal
+
+  Excluded from overdue tracking:
+  - Submitted
+  - Internal Approved
+  - Approved
+  - Hold/Cancelled
+
+  Include in overdue tracking:
+  - Coding
+  - Scraping
+  - Scrape Error
+  - QA
+  - QA Check in Progress
+  - QA Error
+  - QA Fixes in Progress
+
+  Does this look right? Want me to create the automated script now?
+
+❯ yes 
+
+⏺ Write(asana_daily_summary.sh)
+  ⎿  Wrote 200 lines to asana_daily_summary.sh                  
+      1 #!/bin/bash
+      2 # Asana Daily Summary Script for Ideon Scraping Internal
+      3 # Generates a summary of last 24 hours activity
+      4 set -e
+      5 # Load environment
+      6 source ~/.claude/.env 2>/dev/null || true
+     … +190 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/8 done)
+
+⏺ Bash(chmod +x /Users/dikson/Work/second_brain/asana_daily_summary.sh &&
+      /Users/dikson/Work/second_brain/asana_daily_summary.sh)
+  ⎿  Error: Exit code 2
+     /Users/dikson/Work/second_brain/asana_daily_summary.sh: line 40: declare: 
+     -A: invalid option
+     declare: usage: declare [-afFirtx] [-p] [name[=value] ...]
+
+     📊 Ideon Scraping Internal - Daily Summary
+        Generated: Jan 13, 2026 05:45
+        Period: Last 24 hours
+
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⏺ Let me fix the compatibility issue.
+
+⏺ Write(asana_daily_summary.sh)
+  ⎿  Added 97 lines, removed 89 lines                                    
+      20  # Sections to exclude from overdue tracking
+      21  EXCLUDED_SECTIONS="Submitted|Internal Approved|Approved|Hold/Ca
+          ncelled|To do"
+      22  
+      23 +# Temp files                                                   
+      24 +TMP_DIR="/tmp/asana_summary_$$"                                
+      25 +mkdir -p "$TMP_DIR"                                            
+      26 +                                                               
+      27 +cleanup() {                                                    
+      28 +  rm -rf "$TMP_DIR"                                            
+      29 +}                                                              
+      30 +trap cleanup EXIT                                              
+      31 +                                                               
+      32  echo "📊 Ideon Scraping Internal - Daily Summary"
+      33  echo "   Generated: $(date '+%b %d, %Y %H:%M')"
+      34  echo "   Period: Last 24 hours"
+     ...
+      41  
+      42  TASK_GIDS=$(echo "$MODIFIED_TASKS" | jq -r '.data[].gid')
+      43  
+      35 -# Arrays to store categorized activities                       
+      36 -declare -a COMPLETED_APPROVED                                  
+      37 -declare -a PROGRESSING                                         
+      38 -declare -a ISSUES_FOUND                                        
+      39 -declare -a FIXES_IN_PROGRESS                                   
+      40 -declare -A USER_ACTIONS                                        
+      41 -                                                               
+      44  # Process each task's stories
+      45  for task_gid in $TASK_GIDS; do
+      46    TASK_NAME=$(echo "$MODIFIED_TASKS" | jq -r --arg gid "$task_g
+          id" '.data[] | select(.gid == $gid) | .name')
+     ...
+      48    STORIES=$(curl -s "${API_BASE}/tasks/${task_gid}/stories?opt_
+          fields=created_at,created_by.name,resource_subtype,text" \
+      49      -H "Authorization: Bearer $ASANA_ACCESS_TOKEN")
+      50  
+      49 -  # Filter stories from last 24 hours                          
+      50 -  RECENT_STORIES=$(echo "$STORIES" | jq --arg since "$SINCE" '[
+         -.data[] | select(.created_at > $since)]')                      
+      51 +  # Filter and process stories from last 24 hours              
+      52 +  echo "$STORIES" | jq -r --arg since "$SINCE" --arg task "$TAS
+         +K_NAME" '                                                      
+      53 +    .data[] | select(.created_at > $since) |                   
+      54 +    "\(.resource_subtype)|\($task)|\(.created_by.name // "Syste
+         +m")|\(.text)"                                                  
+      55 +  ' >> "$TMP_DIR/all_stories.txt" 2>/dev/null || true          
+      56 +done                                                           
+      57  
+      52 -  # Process each story                                         
+      53 -  echo "$RECENT_STORIES" | jq -c '.[]' | while read -r story; d
+         -o                                                              
+      54 -    TYPE=$(echo "$story" | jq -r '.resource_subtype')          
+      55 -    USER=$(echo "$story" | jq -r '.created_by.name // "System"'
+         -)                                                              
+      56 -    TEXT=$(echo "$story" | jq -r '.text')                      
+      58 +# Categorize stories                                           
+      59 +if [ -f "$TMP_DIR/all_stories.txt" ]; then                     
+      60 +  # Completed/Approved                                         
+      61 +  grep "section_changed" "$TMP_DIR/all_stories.txt" 2>/dev/null
+         + | \                                                           
+      62 +    grep -E 'to "(Internal Approved|Submitted|Approved)"' | \  
+      63 +    sort -u > "$TMP_DIR/completed.txt" 2>/dev/null || true     
+      64  
+      58 -    # Count user actions                                       
+      59 -    if [ "$USER" != "null" ] && [ "$USER" != "System" ]; then  
+      60 -      echo "$USER" >> /tmp/asana_user_actions_$$               
+      61 -    fi                                                         
+      65 +  # Issues Found                                               
+      66 +  grep "section_changed" "$TMP_DIR/all_stories.txt" 2>/dev/null
+         + | \                                                           
+      67 +    grep -E 'to "(Scrape Error|QA Error)"' | \                 
+      68 +    sort -u > "$TMP_DIR/issues.txt" 2>/dev/null || true        
+      69  
+      63 -    # Categorize section changes                               
+      64 -    if [ "$TYPE" = "section_changed" ]; then                   
+      65 -      if echo "$TEXT" | grep -qE "to \"(Internal Approved|Submi
+         -tted|Approved)\""; then                                        
+      66 -        echo "COMPLETED|${TASK_NAME}|${TEXT}|${USER}" >> /tmp/a
+         -sana_completed_$$                                              
+      67 -      elif echo "$TEXT" | grep -qE "to \"(Scrape Error|QA Error
+         -)\""; then                                                     
+      68 -        echo "ISSUE|${TASK_NAME}|${TEXT}|${USER}" >> /tmp/asana
+         -_issues_$$                                                     
+      69 -      elif echo "$TEXT" | grep -qE "to \"(QA Fixes|Scraping)\".
+         -*from.*(Error|Fixes)"; then                                    
+      70 -        echo "FIX|${TASK_NAME}|${TEXT}|${USER}" >> /tmp/asana_f
+         -ixes_$$                                                        
+      71 -      elif echo "$TEXT" | grep -qE "to \"(Coding|Scraping|QA)\"
+         -"; then                                                        
+      72 -        echo "PROGRESS|${TASK_NAME}|${TEXT}|${USER}" >> /tmp/as
+         -ana_progress_$$                                                
+      73 -      fi                                                       
+      74 -    fi                                                         
+      70 +  # Fixes (moved back from error states)                       
+      71 +  grep "section_changed" "$TMP_DIR/all_stories.txt" 2>/dev/null
+         + | \                                                           
+      72 +    grep -E 'from "(Scrape Error|QA Error|QA Fixes)".*to "(Scra
+         +ping|QA Fixes|Internal Approved)"' | \                         
+      73 +    sort -u > "$TMP_DIR/fixes.txt" 2>/dev/null || true         
+      74  
+      76 -    # Track comments                                           
+      77 -    if [ "$TYPE" = "comment_added" ]; then                     
+      78 -      echo "COMMENT|${TASK_NAME}|${USER}|${TEXT}" >> /tmp/asana
+         -_comments_$$                                                   
+      79 -    fi                                                         
+      80 -  done                                                         
+      81 -done                                                           
+      75 +  # Progressing (forward movement, excluding already categorize
+         +d)                                                             
+      76 +  grep "section_changed" "$TMP_DIR/all_stories.txt" 2>/dev/null
+         + | \                                                           
+      77 +    grep -E 'to "(Coding|Scraping|QA|QA Check)"' | \           
+      78 +    grep -vE 'to "(Scrape Error|QA Error)"' | \                
+      79 +    sort -u > "$TMP_DIR/progress.txt" 2>/dev/null || true      
+      80  
+      81 +  # User actions count                                         
+      82 +  cut -d'|' -f3 "$TMP_DIR/all_stories.txt" 2>/dev/null | \     
+      83 +    grep -v "System" | grep -v "null" | \                      
+      84 +    sort | uniq -c | sort -rn > "$TMP_DIR/user_actions.txt" 2>/
+         +dev/null || true                                               
+      85 +fi                                                             
+      86 +                                                               
+      87  # Display Completed/Approved
+      88  echo ""
+      89  echo "✅ COMPLETED/APPROVED"
+      86 -if [ -f /tmp/asana_completed_$$ ]; then                        
+      87 -  cat /tmp/asana_completed_$$ | while IFS='|' read -r _ task te
+         -xt user; do                                                    
+      88 -    section=$(echo "$text" | grep -oE 'to "[^"]+"' | sed 's/to 
+         -"//;s/"//')                                                    
+      90 +if [ -s "$TMP_DIR/completed.txt" ]; then                       
+      91 +  while IFS='|' read -r type task user text; do                
+      92 +    section=$(echo "$text" | grep -oE 'to "[^"]+"' | head -1 | 
+         +sed 's/to "//;s/"//')                                          
+      93      echo "   • ${task} → ${section} (${user})"
+      90 -  done | sort -u                                               
+      94 +  done < "$TMP_DIR/completed.txt" | sort -u                    
+      95  else
+      96    echo "   (none)"
+      97  fi
+     ...
+       99  # Display Progressing
+      100  echo ""
+      101  echo "🔄 PROGRESSING"
+       98 -if [ -f /tmp/asana_progress_$$ ]; then                        
+       99 -  cat /tmp/asana_progress_$$ | while IFS='|' read -r _ task te
+          -xt user; do                                                   
+      100 -    section=$(echo "$text" | grep -oE 'to "[^"]+"' | sed 's/to
+          - "//;s/"//')                                                  
+      102 +if [ -s "$TMP_DIR/progress.txt" ]; then                       
+      103 +  while IFS='|' read -r type task user text; do               
+      104 +    section=$(echo "$text" | grep -oE 'to "[^"]+"' | head -1 |
+          + sed 's/to "//;s/"//')                                        
+      105      echo "   • ${task} → ${section} (${user})"
+      102 -  done | sort -u                                              
+      106 +  done < "$TMP_DIR/progress.txt" | sort -u                    
+      107  else
+      108    echo "   (none)"
+      109  fi
+     ...
+      111  # Display Issues Found
+      112  echo ""
+      113  echo "⚠️  ISSUES FOUND"
+      110 -if [ -f /tmp/asana_issues_$$ ]; then                          
+      111 -  cat /tmp/asana_issues_$$ | while IFS='|' read -r _ task text
+          - user; do                                                     
+      112 -    section=$(echo "$text" | grep -oE 'to "[^"]+"' | sed 's/to
+          - "//;s/"//')                                                  
+      114 +if [ -s "$TMP_DIR/issues.txt" ]; then                         
+      115 +  while IFS='|' read -r type task user text; do               
+      116 +    section=$(echo "$text" | grep -oE 'to "[^"]+"' | head -1 |
+          + sed 's/to "//;s/"//')                                        
+      117      echo "   • ${task} → ${section} (${user})"
+      114 -  done | sort -u                                              
+      118 +  done < "$TMP_DIR/issues.txt" | sort -u                      
+      119  else
+      120    echo "   (none)"
+      121  fi
+     ...
+      123  # Display Fixes In Progress
+      124  echo ""
+      125  echo "🔧 FIXES IN PROGRESS"
+      122 -if [ -f /tmp/asana_fixes_$$ ]; then                           
+      123 -  cat /tmp/asana_fixes_$$ | while IFS='|' read -r _ task text 
+          -user; do                                                      
+      124 -    section=$(echo "$text" | grep -oE 'to "[^"]+"' | sed 's/to
+          - "//;s/"//')                                                  
+      125 -    echo "   • ${task} → ${section} (${user})"                
+      126 -  done | sort -u                                              
+      126 +if [ -s "$TMP_DIR/fixes.txt" ]; then                          
+      127 +  while IFS='|' read -r type task user text; do               
+      128 +    to_section=$(echo "$text" | grep -oE 'to "[^"]+"' | head -
+          +1 | sed 's/to "//;s/"//')                                     
+      129 +    echo "   • ${task} → ${to_section} (${user})"             
+      130 +  done < "$TMP_DIR/fixes.txt" | sort -u                       
+      131  else
+      132    echo "   (none)"
+      133  fi
+     ...
+      138  # Get overdue tasks (excluding Submitted/Approved sections)
+      139  echo ""
+      140  echo "🚨 OVERDUE TASKS"
+      137 -OVERDUE=$(curl -s "${API_BASE}/projects/${PROJECT_GID}/tasks?o
+          -pt_fields=gid,name,assignee.name,due_on,completed,memberships.
+          -section.name&limit=100" \                                     
+      141 +curl -s "${API_BASE}/projects/${PROJECT_GID}/tasks?opt_fields=
+          +gid,name,assignee.name,due_on,completed,memberships.section.na
+          +me&limit=100" \                                               
+      142    -H "Authorization: Bearer $ASANA_ACCESS_TOKEN" | \
+      139 -  jq --arg today "$TODAY" --arg excluded "$EXCLUDED_SECTIONS" 
+          -'                                                             
+      140 -    [.data[] |                                                
+      141 -      select(.completed == false and .due_on != null and .due_
+          -on < $today) |                                                
+      142 -      select(.memberships[0].section.name | test($excluded) | 
+          -not) |                                                        
+      143 -      {                                                       
+      144 -        name,                                                 
+      145 -        assignee: (.assignee.name // "Unassigned"),           
+      146 -        due_on,                                               
+      147 -        section: .memberships[0].section.name,                
+      148 -        days_overdue: ((($today | strptime("%Y-%m-%d") | mktim
+          -e) - (.due_on | strptime("%Y-%m-%d") | mktime)) / 86400 | floo
+          -r)                                                            
+      149 -      }                                                       
+      150 -    ] | sort_by(.days_overdue) | reverse')                    
+      143 +  jq -r --arg today "$TODAY" '                                
+      144 +    .data[] |                                                 
+      145 +    select(.completed == false and .due_on != null and .due_on
+          + < $today) |                                                  
+      146 +    select(.memberships[0].section.name | test("Submitted|Inte
+          +rnal Approved|Approved|Hold|To do") | not) |                  
+      147 +    {                                                         
+      148 +      name,                                                   
+      149 +      assignee: (.assignee.name // "⚠️ Unassigned"),          
+      150 +      due_on,                                                 
+      151 +      section: .memberships[0].section.name                   
+      152 +    } |                                                       
+      153 +    "   • \(.name) (\(.section)) - due \(.due_on) → \(.assigne
+          +e)"                                                           
+      154 +  ' | while read -r line; do                                  
+      155 +    # Calculate days overdue                                  
+      156 +    task_due=$(echo "$line" | grep -oE 'due [0-9]{4}-[0-9]{2}-
+          +[0-9]{2}' | sed 's/due //')                                   
+      157 +    if [ -n "$task_due" ]; then                               
+      158 +      days=$(( ($(date -jf "%Y-%m-%d" "$TODAY" +%s 2>/dev/null
+          + || date -d "$TODAY" +%s) - $(date -jf "%Y-%m-%d" "$task_due" 
+          ++%s 2>/dev/null || date -d "$task_due" +%s)) / 86400 ))       
+      159 +      echo "$line" | sed "s/due $task_due/$days days overdue/"
+      160 +    else                                                      
+      161 +      echo "$line"                                            
+      162 +    fi                                                        
+      163 +  done | sort -t'-' -k2 -rn                                   
+      164  
+      152 -if [ "$(echo "$OVERDUE" | jq 'length')" -gt 0 ]; then         
+      153 -  echo "$OVERDUE" | jq -r '.[] | "   • \(.name) (\(.section)) 
+          -- \(.days_overdue) days overdue → \(.assignee)"'              
+      154 -else                                                          
+      155 -  echo "   (none)"                                            
+      156 -fi                                                            
+      157 -                                                              
+      165  echo ""
+      166  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           ━━━━"
+      167  
+      168  # Get workload distribution
+      169  echo ""
+      170  echo "📋 WORKLOAD DISTRIBUTION (Active Tasks)"
+      164 -WORKLOAD=$(curl -s "${API_BASE}/projects/${PROJECT_GID}/tasks?
+          -opt_fields=gid,name,assignee.name,completed,memberships.sectio
+          -n.name&limit=100" \                                           
+      171 +echo ""                                                       
+      172 +printf "   %-20s │ %5s │ %s\n" "Assignee" "Tasks" "Breakdown" 
+      173 +echo "   ─────────────────────┼───────┼───────────────────────
+          +──────────"                                                   
+      174 +                                                              
+      175 +curl -s "${API_BASE}/projects/${PROJECT_GID}/tasks?opt_fields=
+          +gid,name,assignee.name,completed,memberships.section.name&limi
+          +t=100" \                                                      
+      176    -H "Authorization: Bearer $ASANA_ACCESS_TOKEN" | \
+      166 -  jq --arg excluded "To do|Hold/Cancelled|Approved" '         
+      167 -    [.data[] | select(.completed == false) | select(.membershi
+          -ps[0].section.name | test($excluded) | not)] |                
+      168 -    group_by(.assignee.name // "Unassigned") |                
+      177 +  jq -r '                                                     
+      178 +    [.data[] | select(.completed == false) | select(.membershi
+          +ps[0].section.name | test("To do|Hold|Approved$") | not)] |   
+      179 +    group_by(.assignee.name // "⚠️ Unassigned") |             
+      180      map({
+      170 -      assignee: (.[0].assignee.name // "⚠️  Unassigned"),     
+      181 +      assignee: (.[0].assignee.name // "⚠️ Unassigned"),      
+      182        count: length,
+      183        breakdown: (group_by(.memberships[0].section.name) | map
+           ("\(length) \(.[0].memberships[0].section.name)") | join(", ")
+           )
+      184      }) |
+      174 -    sort_by(.count) | reverse')                               
+      185 +    sort_by(.count) | reverse |                               
+      186 +    .[] |                                                     
+      187 +    "   \(.assignee)|\(.count)|\(.breakdown)"                 
+      188 +  ' | while IFS='|' read -r assignee count breakdown; do      
+      189 +    printf "%-23s │ %5s │ %s\n" "$assignee" "$count" "$breakdo
+          +wn"                                                           
+      190 +  done                                                        
+      191  
+      192  echo ""
+      177 -printf "   %-20s │ %5s │ %s\n" "Assignee" "Tasks" "Breakdown" 
+      178 -echo "   ─────────────────────┼───────┼───────────────────────
+          -──────────"                                                   
+      179 -echo "$WORKLOAD" | jq -r '.[] | "   \(.assignee | .[0:20] | . 
+          -+ " " * (20 - length)) │ \(.count | tostring | " " * (5 - leng
+          -th) + .) │ \(.breakdown)"'                                    
+      180 -                                                              
+      181 -echo ""                                                       
+      193  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           ━━━━"
+      194  
+      195  # User activity count
+      196  echo ""
+      197  echo "👥 USER ACTIVITY (Last 24h)"
+      187 -if [ -f /tmp/asana_user_actions_$$ ]; then                    
+      188 -  sort /tmp/asana_user_actions_$$ | uniq -c | sort -rn | while
+          - read -r count user; do                                       
+      198 +if [ -s "$TMP_DIR/user_actions.txt" ]; then                   
+      199 +  while read -r count user; do                                
+      200      printf "   %-20s %3d actions\n" "$user" "$count"
+      190 -  done                                                        
+      201 +  done < "$TMP_DIR/user_actions.txt"                          
+      202  else
+      203    echo "   (no activity recorded)"
+      204  fi
+      205  
+      195 -# Cleanup temp files                                          
+      196 -rm -f /tmp/asana_*_$$                                         
+      197 -                                                              
+      206  echo ""
+      207  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           ━━━━"
+  ⎿  Running PostToolUse hooks… (1/8 done)
+
+⏺ Bash(/Users/dikson/Work/second_brain/asana_daily_summary.sh)
+  ⎿  📊 Ideon Scraping Internal - Daily Summary
+        Generated: Jan 13, 2026 05:45
+        Period: Last 24 hours
+     … +102 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ The script works but has some issues with user activity parsing. Let me fix that.
+
+⏺ Update(asana_daily_summary.sh)
+  ⎿  Added 4 lines, removed 2 lines                                      
+      78      grep -vE 'to "(Scrape Error|QA Error)"' | \
+      79      sort -u > "$TMP_DIR/progress.txt" 2>/dev/null || true
+      80  
+      81 -  # User actions count                                         
+      81 +  # User actions count (only valid usernames, exclude comments/
+         +URLs)                                                          
+      82    cut -d'|' -f3 "$TMP_DIR/all_stories.txt" 2>/dev/null | \
+      83 -    grep -v "System" | grep -v "null" | \                      
+      83 +    grep -v "System" | grep -v "null" | grep -v "^$" | \       
+      84 +    grep -vE "^(http|https|First|Last|Have|Approving|[0-9])" | 
+         +\                                                              
+      85 +    grep -E "^[A-Z][a-z]+ [A-Z][a-z]+" | \                     
+      86      sort | uniq -c | sort -rn > "$TMP_DIR/user_actions.txt" 2>/
+          dev/null || true
+      87  fi
+      88  
+  ⎿  Running PostToolUse hooks… (1/7 done)
+
+⏺ Bash(/Users/dikson/Work/second_brain/asana_daily_summary.sh)
+  ⎿  📊 Ideon Scraping Internal - Daily Summary
+        Generated: Jan 13, 2026 05:46
+        Period: Last 24 hours
+     … +77 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ The script is working. Let me fix the small formatting issue with the bullet spacing in overdue tasks.
+
+⏺ Update(asana_daily_summary.sh)
+  ⎿  Added 1 line, removed 1 line                                        
+      152        due_on,
+      153        section: .memberships[0].section.name
+      154      } |
+      155 -    "   • \(.name) (\(.section)) - due \(.due_on) → \(.assigne
+          -e)"                                                           
+      155 +"   • \(.name) (\(.section)) - due \(.due_on) → \(.assignee)" 
+      156    ' | while read -r line; do
+      157      # Calculate days overdue
+      158      task_due=$(echo "$line" | grep -oE 'due [0-9]{4}-[0-9]{2}-
+           [0-9]{2}' | sed 's/due //')
+  ⎿  Running PostToolUse hooks… (1/7 done)
+
+⏺ Bash(/Users/dikson/Work/second_brain/asana_daily_summary.sh)
+  ⎿  📊 Ideon Scraping Internal - Daily Summary
+        Generated: Jan 13, 2026 05:47
+        Period: Last 24 hours
+     … +77 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Script created and working.
+
+  Summary
+
+  Script location: /Users/dikson/Work/second_brain/asana_daily_summary.sh
+
+  Run it with:
+  ./asana_daily_summary.sh
+
+  What it shows:
+  Section: ✅ Completed/Approved
+  Description: Tasks moved to Internal Approved, Submitted, Approved
+  ────────────────────────────────────────
+  Section: 🔄 Progressing
+  Description: Tasks moving forward (Coding, Scraping, QA)
+  ────────────────────────────────────────
+  Section: ⚠️ Issues Found
+  Description: Tasks moved to Scrape Error or QA Error
+  ────────────────────────────────────────
+  Section: 🔧 Fixes In Progress
+  Description: Tasks returning from error states
+  ────────────────────────────────────────
+  Section: 🚨 Overdue Tasks
+  Description: Past due (excludes Submitted/Approved), with days count
+  ────────────────────────────────────────
+  Section: 📋 Workload Distribution
+  Description: Tasks per person with breakdown by section
+  ────────────────────────────────────────
+  Section: 👥 User Activity
+  Description: Action count per user in last 24h
+  Note: Some tasks appear with multiple users because they're multi-homed across linked projects (Ideon Scraping Internal ↔ Scraping Task Progress).
+
+✻ Worked for 3m 54s
+
+❯ Add a post processing to this using claude headless and then save to      
+  asana_daily_summary/{}.md file                                            
+
+⏺ Bash(mkdir -p /Users/dikson/Work/second_brain/asana_daily_summary)
+  ⎿  (No content)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+  ⎿  Interrupted · What should Claude do instead?
+
+❯ Add a post processing to this using claude headless and then save to      
+  asana_daily_summary/{}.md file. Udpate teh script to do this.             
+
+⏺ Update(asana_daily_summary.sh)
+  ⎿  Added 7 lines                                                       
+      2  
+      3  # Asana Daily Summary Script for Ideon Scraping Internal
+      4  # Generates a summary of last 24 hours activity
+      5 +# Post-processes with Claude and saves to markdown              
+      6  
+      7  set -e
+      8  
+     ...
+      13  PROJECT_GID="1208639428824137"
+      14  WORKSPACE_GID="1200807498271803"
+      15  API_BASE="https://app.asana.com/api/1.0"
+      16 +SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"     
+      17 +OUTPUT_DIR="${SCRIPT_DIR}/asana_daily_summary"                 
+      18  
+      19  # Date calculations
+      20  TODAY=$(date -u +"%Y-%m-%d")
+     ...
+      26  # Temp files
+      27  TMP_DIR="/tmp/asana_summary_$$"
+      28  mkdir -p "$TMP_DIR"
+      29 +mkdir -p "$OUTPUT_DIR"                                         
+      30  
+      31  cleanup() {
+      32    rm -rf "$TMP_DIR"
+      33  }
+      34  trap cleanup EXIT
+      35  
+      36 +# Start capturing output                                       
+      37 +exec > >(tee "$TMP_DIR/raw_output.txt") 2>&1                   
+      38 +                                                               
+      39  echo "📊 Ideon Scraping Internal - Daily Summary"
+      40  echo "   Generated: $(date '+%b %d, %Y %H:%M')"
+      41  echo "   Period: Last 24 hours"
+  ⎿  Running PostToolUse hooks… (1/7 done)
+
+⏺ Update(asana_daily_summary.sh)
+  ⎿  Error editing file
+
+⏺ Read(asana_daily_summary.sh)
+  ⎿  Read 23 lines
+
+⏺ Update(asana_daily_summary.sh)
+  ⎿  Added 30 lines                                                      
+      214  
+      215  echo ""
+      216  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           ━━━━"
+      217 +                                                              
+      218 +# Stop capturing and post-process with Claude                 
+      219 +exec > /dev/tty 2>&1                                          
+      220 +                                                              
+      221 +OUTPUT_FILE="${OUTPUT_DIR}/${TODAY}.md"                       
+      222 +                                                              
+      223 +echo ""                                                       
+      224 +echo "🤖 Post-processing with Claude..."                      
+      225 +echo ""                                                       
+      226 +                                                              
+      227 +# Post-process with Claude headless                           
+      228 +claude -p "You are summarizing an Asana daily report. Clean up
+          + this report and format it as a clean markdown document:      
+      229 +                                                              
+      230 +1. Remove duplicate entries (same task appearing multiple time
+          +s with different users - keep only the most significant action
+          +)                                                             
+      231 +2. Deduplicate tasks that appear in multiple sections (if a ta
+          +sk went through multiple stages, show only the final state rea
+          +ched today)                                                   
+      232 +3. Format as clean markdown with proper headers               
+      233 +4. Add a brief executive summary at the top (2-3 sentences hig
+          +hlighting key points)                                         
+      234 +5. Keep all the sections but make them cleaner                
+      235 +6. Ensure overdue tasks are clearly highlighted               
+      236 +7. Add any actionable insights at the bottom                  
+      237 +                                                              
+      238 +Here's the raw report:                                        
+      239 +                                                              
+      240 +$(cat "$TMP_DIR/raw_output.txt")                              
+      241 +                                                              
+      242 +Output clean markdown only, no explanations." --output-format 
+          +text > "$OUTPUT_FILE"                                         
+      243 +                                                              
+      244 +echo "✅ Summary saved to: $OUTPUT_FILE"                      
+      245 +echo ""                                                       
+      246 +cat "$OUTPUT_FILE"                                            
+  ⎿  Running PostToolUse hooks… (1/7 done)
+
+⏺ Bash(/Users/dikson/Work/second_brain/asana_daily_summary.sh) timeout: 3m 0s
+  ⎿  Error: Exit code 1
+     📊 Ideon Scraping Internal - Daily Summary
+        Generated: Jan 13, 2026 05:50
+        Period: Last 24 hours
+
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+     ✅ COMPLETED/APPROVED
+        • Baylor Scott and White → Internal Approved (Rohit Dangol)
+        • BCBS IL → Approved (Dikson Rajbanshi)
+     … +69 lines (ctrl+o to see all)
+
+⏺ Let me fix the tty issue by using a different approach.
+
+⏺ Update(asana_daily_summary.sh)
+  ⎿  Added 2 lines, removed 3 lines                                      
+      33  }
+      34  trap cleanup EXIT
+      35  
+      36 -# Start capturing output                                       
+      37 -exec > >(tee "$TMP_DIR/raw_output.txt") 2>&1                   
+      38 -                                                               
+      36 +# Function to generate raw report                              
+      37 +generate_raw_report() {                                        
+      38  echo "📊 Ideon Scraping Internal - Daily Summary"
+      39  echo "   Generated: $(date '+%b %d, %Y %H:%M')"
+      40  echo "   Period: Last 24 hours"
+  ⎿  Running PostToolUse hooks… (1/7 done)
+
+⏺ Update(asana_daily_summary.sh)
+  ⎿  Added 6 lines, removed 2 lines                                      
+      213  
+      214  echo ""
+      215  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           ━━━━"
+      216 +}                                                             
+      217  
+      217 -# Stop capturing and post-process with Claude                 
+      218 -exec > /dev/tty 2>&1                                          
+      218 +# Generate raw report and save to temp file                   
+      219 +generate_raw_report > "$TMP_DIR/raw_output.txt" 2>&1          
+      220  
+      221 +# Show raw output                                             
+      222 +cat "$TMP_DIR/raw_output.txt"                                 
+      223 +                                                              
+      224  OUTPUT_FILE="${OUTPUT_DIR}/${TODAY}.md"
+      225  
+      226  echo ""
+  ⎿  Running PostToolUse hooks… (1/7 done)
+
+⏺ Bash(/Users/dikson/Work/second_brain/asana_daily_summary.sh) timeout: 3m 0s
+  ⎿  📊 Ideon Scraping Internal - Daily Summary
+        Generated: Jan 13, 2026 05:51
+        Period: Last 24 hours
+     … +182 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Script works. Let me verify the file was saved.
+
+⏺ Bash(ls -la /Users/dikson/Work/second_brain/asana_daily_summary/)
+  ⎿  total 8                                                     
+     drwxr-xr-x  3 dikson  staff    96 Jan 13 05:51 .
+     drwxr-xr-x  7 dikson  staff   224 Jan 13 05:51 ..
+     -rw-r--r--  1 dikson  staff  2936 Jan 13 05:52 2026-01-13.md
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Done. The script now:
+
+  1. Fetches raw data from Asana API
+  2. Generates raw report with all sections
+  3. Post-processes with Claude to clean up duplicates and format as markdown
+  4. Saves to asana_daily_summary/{YYYY-MM-DD}.md
+
+  Output:
+  asana_daily_summary/
+  └── 2026-01-13.md   # Today's summary
+
+  Run daily with:
+  ./asana_daily_summary.sh
+
+  The Claude post-processing adds:
+  - Executive summary (2-3 sentences)
+  - Clean tables (no duplicates)
+  - Actionable insights at the bottom
+
+✻ Worked for 3m 13s
+
+❯ Add another post processing to this script to post this to the ClickUP    
+  #Scraping channel. Use CLickup skill for this.                            
+
+⏺ Skill(clickup)
+  ⎿  Successfully loaded skill · 3 tools allowed
+
+⏺ Let me find the ClickUp workspace and #Scraping channel ID first.
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null…)
+  ⎿  {                    
+       "id": "9017490901",
+       "name": "Beena"
+     }
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null…)
+  ⎿  Error: Exit code 5
+     jq: error (at <stdin>:0): Cannot iterate over null (null)
+
+⏺ Bash(source ~/.claude/.env 2>/dev/null…)
+  ⎿  {                              
+       "data": [
+         {
+     … +784 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Found the #Scraping channel (ID: 8cqqzen-1397). Let me update the script to post to ClickUp.
+
+⏺ Update(asana_daily_summary.sh)
+  ⎿  Added 25 lines                                                      
+      247  echo "✅ Summary saved to: $OUTPUT_FILE"
+      248  echo ""
+      249  cat "$OUTPUT_FILE"
+      250 +                                                              
+      251 +# Post to ClickUp #Scraping channel                           
+      252 +CLICKUP_WORKSPACE_ID="9017490901"                             
+      253 +CLICKUP_CHANNEL_ID="8cqqzen-1397"                             
+      254 +                                                              
+      255 +echo ""                                                       
+      256 +echo "📤 Posting to ClickUp #Scraping channel..."             
+      257 +echo ""                                                       
+      258 +                                                              
+      259 +# Format message for ClickUp (convert markdown to ClickUp-comp
+          +atible format)                                                
+      260 +CLICKUP_MESSAGE=$(cat "$OUTPUT_FILE")                         
+      261 +                                                              
+      262 +# Post to ClickUp                                             
+      263 +CLICKUP_RESPONSE=$(curl -s -X POST "https://api.clickup.com/ap
+          +i/v3/workspaces/${CLICKUP_WORKSPACE_ID}/chat/channels/${CLICKU
+          +P_CHANNEL_ID}/messages" \                                     
+      264 +  -H "Authorization: $CLICKUP_API_TOKEN" \                    
+      265 +  -H "Content-Type: application/json" \                       
+      266 +  -d "$(jq -n --arg content "$CLICKUP_MESSAGE" '{"content": $c
+          +ontent}')")                                                   
+      267 +                                                              
+      268 +# Check if post was successful                                
+      269 +if echo "$CLICKUP_RESPONSE" | jq -e '.id' > /dev/null 2>&1; th
+          +en                                                            
+      270 +  echo "✅ Posted to ClickUp #Scraping channel successfully!" 
+      271 +else                                                          
+      272 +  echo "❌ Failed to post to ClickUp:"                        
+      273 +  echo "$CLICKUP_RESPONSE" | jq                               
+      274 +fi                                                            
+  ⎿  Running PostToolUse hooks… (1/7 done)
+
+⏺ Bash(/Users/dikson/Work/second_brain/asana_daily_summary.sh 2>&1  timeout: 3m 
+      | tail -50)                                                   0s
+
+  ⎿  | BCBS TX | QA Error | Asim Adhikari |             
+     | Emblem Health | Scrape Error | Dikson Rajbanshi |
+     … +52 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Script updated and working.
+
+  Summary
+
+  The script now:
+  1. Fetches Asana data (tasks, movements, activity)
+  2. Generates raw report
+  3. Post-processes with Claude headless → clean markdown
+  4. Saves to asana_daily_summary/2026-01-13.md
+  5. Posts to ClickUp #Scraping channel
+
+  Run with:
+  ./asana_daily_summary.sh
+
+  Output:
+  📊 [Raw Asana report...]
+  🤖 Post-processing with Claude...
+  ✅ Summary saved to: asana_daily_summary/2026-01-13.md
+  📤 Posting to ClickUp #Scraping channel...
+  ✅ Posted to ClickUp #Scraping channel successfully!
+
+✻ Crunched for 1m 51s
+
+❯ 📊 Ideon Scraping Internal - Daily Summary                                
+  Generated: Jan 13, 2026 05:47                                             
+  Period: Last 24 hours                                                     
+                                                                            
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━              
+                                                                            
+  ✅ COMPLETED/APPROVED                                                     
+  • Baylor Scott and White → Internal Approved (Rohit Dangol)               
+  • BCBS IL → Approved (Dikson Rajbanshi)                                   
+  • BCBS IL → Submitted (Dikson Rajbanshi)                                  
+  • BCBS IL → Submitted (Rohit Dangol)                                      
+  • BCBS TX → Internal Approved (Rohit Dangol)                              
+  • BCBS TX → Submitted (Dikson Rajbanshi)                                  
+  • BCBS TX → Submitted (Rohit Dangol)                                      
+  • Braven Health → Approved (Dikson Rajbanshi)                             
+  • Christus Health Plan → Approved (Dikson Rajbanshi)                      
+  • Christus Health Plan → Internal Approved (Rohit Dangol)                 
+  • Christus Health Plan → Submitted (Dikson Rajbanshi)                     
+  • Christus Health Plan → Submitted (Rohit Dangol)                         
+  • Medica Mayo Medical → Approved (Dikson Rajbanshi)                       
+  • Medica Mayo Medical → Internal Approved (Rohit Dangol)                  
+  • Medica Mayo Medical → Submitted (Dikson Rajbanshi)                      
+  • Medica Mayo Medical → Submitted (Rohit Dangol)                          
+  • NC Medicaid → Approved (Dikson Rajbanshi)                               
+  • UCLA Health → Approved (Dikson Rajbanshi)                               
+  • UCLA Health → Submitted (Dikson Rajbanshi)                              
+  • UCLA Health → Submitted (Rohit Dangol)                                  
+                                                                            
+  🔄 PROGRESSING                                                            
+  • Anthem → Scraping (Dikson Rajbanshi)                                    
+  • Anthem → Scraping (Rohit Dangol)                                        
+  • BCBS MA → QA (Dikson Rajbanshi)                                         
+  • Mainecare - Medicaid site → Scraping (Dikson Rajbanshi)                 
+  • Mainecare - Medicaid site → Scraping (Rohit Dangol)                     
+  • UPMC → Coding (Asim Adhikari)                                           
+                                                                            
+  ⚠️  ISSUES FOUND                                                          
+  • Aetna Better Health of Oklahoma → Scrape Error (Rohit Dangol)           
+  • Baylor Scott and White → QA Error (Asim Adhikari)                       
+  • BCBS TX → QA Error (Asim Adhikari)                                      
+  • BCBS TX → QA Error (Rohit Dangol)                                       
+  • Emblem Health → Scrape Error (Dikson Rajbanshi)                         
+                                                                            
+  🔧 FIXES IN PROGRESS                                                      
+  • BCBS TX → Internal Approved (Rohit Dangol)                              
+  • Mainecare - Medicaid site → Scraping (Rohit Dangol)                     
+                                                                            
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━              
+                                                                            
+  🚨 OVERDUE TASKS                                                          
+  • QualCare (QA Fixes in Progress) - 11 days overdue → ⚠️ Unassigned       
+  • BCBS MT (QA Error) - 9 days overdue → Pramod Phuyal                     
+  • Independence (Scraping) - 3 days overdue → Pramod Phuyal                
+  • CareFirst (Scraping) - 3 days overdue → Dikson Rajbanshi                
+  • Sentara Health Plans (Scraping) - 2 days overdue → Pramod Phuyal        
+  • Aetna Better Health of Oklahoma (Scrape Error) - 2 days overdue →       
+  Pramod Phuyal                                                             
+                                                                            
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━              
+                                                                            
+  📋 WORKLOAD DISTRIBUTION (Active Tasks)                                   
+                                                                            
+  Assignee             │ Tasks │ Breakdown                                  
+  ─────────────────────┼───────┼─────────────────────────────────           
+  ⚠️ Unassigned    │     7 │ 1 Coding, 1 QA Fixes in Progress, 3            
+  Scraping, 2 Submitted                                                     
+  Pramod Phuyal        │     6 │ 2 QA Error, 2 Scrape Error, 2 Scraping     
+  Dikson Rajbanshi     │     2 │ 1 Coding, 1 Scraping                       
+  Rohit Dangol         │     1 │ 1 QA                                       
+                                                                            
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━              
+                                                                            
+  👥 USER ACTIVITY (Last 24h)                                               
+  Dikson Rajbanshi      48 actions                                          
+  Rohit Dangol          33 actions                                          
+  Asim Adhikari         10 actions                                          
+  Pramod Phuyal          1 actions                                          
+                                                                            
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━              
+  ❯ git init Keep it simple with this format. Add options to toggle         
+  post-processing and clickup posts                                         
+
+⏺ Update(asana_daily_summary.sh)
+  ⎿  Added 44 lines, removed 1 line                                      
+       2  
+       3  # Asana Daily Summary Script for Ideon Scraping Internal
+       4  # Generates a summary of last 24 hours activity
+       5 -# Post-processes with Claude and saves to markdown             
+       5  
+       6  set -e
+       7  
+       8 +# Options (defaults)                                           
+       9 +POST_PROCESS=false                                             
+      10 +POST_CLICKUP=false                                             
+      11 +                                                               
+      12 +# Parse arguments                                              
+      13 +while [[ $# -gt 0 ]]; do                                       
+      14 +  case $1 in                                                   
+      15 +    --process|-p)                                              
+      16 +      POST_PROCESS=true                                        
+      17 +      shift                                                    
+      18 +      ;;                                                       
+      19 +    --clickup|-c)                                              
+      20 +      POST_CLICKUP=true                                        
+      21 +      shift                                                    
+      22 +      ;;                                                       
+      23 +    --all|-a)                                                  
+      24 +      POST_PROCESS=true                                        
+      25 +      POST_CLICKUP=true                                        
+      26 +      shift                                                    
+      27 +      ;;                                                       
+      28 +    --help|-h)                                                 
+      29 +      echo "Usage: $0 [OPTIONS]"                               
+      30 +      echo ""                                                  
+      31 +      echo "Options:"                                          
+      32 +      echo "  -p, --process   Post-process with Claude (clean m
+         +arkdown)"                                                      
+      33 +      echo "  -c, --clickup   Post to ClickUp #Scraping channel
+         +"                                                              
+      34 +      echo "  -a, --all       Enable all options (process + cli
+         +ckup)"                                                         
+      35 +      echo "  -h, --help      Show this help"                  
+      36 +      echo ""                                                  
+      37 +      echo "Examples:"                                         
+      38 +      echo "  $0              # Raw report only"               
+      39 +      echo "  $0 -p           # Raw + Claude post-processing"  
+      40 +      echo "  $0 -c           # Raw + post to ClickUp"         
+      41 +      echo "  $0 -a           # Raw + process + ClickUp"       
+      42 +      exit 0                                                   
+      43 +      ;;                                                       
+      44 +    *)                                                         
+      45 +      echo "Unknown option: $1"                                
+      46 +      echo "Use --help for usage"                              
+      47 +      exit 1                                                   
+      48 +      ;;                                                       
+      49 +  esac                                                         
+      50 +done                                                           
+      51 +                                                               
+      52  # Load environment
+      53  source ~/.claude/.env 2>/dev/null || true
+      54  
+  ⎿  Running PostToolUse hooks… (1/7 done)
+
+⏺ Now let me update the end to make post-processing and ClickUp posting conditional.
+
+⏺ Update(asana_daily_summary.sh)
+  ⎿  Added 32 lines, removed 27 lines                                    
+      264  # Show raw output
+      265  cat "$TMP_DIR/raw_output.txt"
+      266  
+      267 +# Save raw output to file                                     
+      268  OUTPUT_FILE="${OUTPUT_DIR}/${TODAY}.md"
+      268 -                                                              
+      269 +cp "$TMP_DIR/raw_output.txt" "$OUTPUT_FILE"                   
+      270  echo ""
+      270 -echo "🤖 Post-processing with Claude..."                      
+      271 -echo ""                                                       
+      271 +echo "✅ Saved to: $OUTPUT_FILE"                              
+      272  
+      273 -# Post-process with Claude headless                           
+      274 -claude -p "You are summarizing an Asana daily report. Clean up
+          - this report and format it as a clean markdown document:      
+      273 +# Post-process with Claude (optional)                         
+      274 +if [ "$POST_PROCESS" = true ]; then                           
+      275 +  echo ""                                                     
+      276 +  echo "🤖 Post-processing with Claude..."                    
+      277 +  echo ""                                                     
+      278  
+      279 +  claude -p "You are summarizing an Asana daily report. Clean 
+          +up this report and format it as a clean markdown document:    
+      280 +                                                              
+      281  1. Remove duplicate entries (same task appearing multiple time
+           s with different users - keep only the most significant action
+           )
+      282  2. Deduplicate tasks that appear in multiple sections (if a ta
+           sk went through multiple stages, show only the final state rea
+           ched today)
+      283  3. Format as clean markdown with proper headers
+     ...
+      292  
+      293  Output clean markdown only, no explanations." --output-format 
+           text > "$OUTPUT_FILE"
+      294  
+      290 -echo "✅ Summary saved to: $OUTPUT_FILE"                      
+      291 -echo ""                                                       
+      292 -cat "$OUTPUT_FILE"                                            
+      295 +  echo "✅ Processed summary saved to: $OUTPUT_FILE"          
+      296 +  echo ""                                                     
+      297 +  cat "$OUTPUT_FILE"                                          
+      298 +fi                                                            
+      299  
+      294 -# Post to ClickUp #Scraping channel                           
+      295 -CLICKUP_WORKSPACE_ID="9017490901"                             
+      296 -CLICKUP_CHANNEL_ID="8cqqzen-1397"                             
+      300 +# Post to ClickUp (optional)                                  
+      301 +if [ "$POST_CLICKUP" = true ]; then                           
+      302 +  CLICKUP_WORKSPACE_ID="9017490901"                           
+      303 +  CLICKUP_CHANNEL_ID="8cqqzen-1397"                           
+      304  
+      298 -echo ""                                                       
+      299 -echo "📤 Posting to ClickUp #Scraping channel..."             
+      300 -echo ""                                                       
+      305 +  echo ""                                                     
+      306 +  echo "📤 Posting to ClickUp #Scraping channel..."           
+      307 +  echo ""                                                     
+      308  
+      302 -# Format message for ClickUp (convert markdown to ClickUp-comp
+          -atible format)                                                
+      303 -CLICKUP_MESSAGE=$(cat "$OUTPUT_FILE")                         
+      309 +  CLICKUP_MESSAGE=$(cat "$OUTPUT_FILE")                       
+      310  
+      305 -# Post to ClickUp                                             
+      306 -CLICKUP_RESPONSE=$(curl -s -X POST "https://api.clickup.com/ap
+          -i/v3/workspaces/${CLICKUP_WORKSPACE_ID}/chat/channels/${CLICKU
+          -P_CHANNEL_ID}/messages" \                                     
+      307 -  -H "Authorization: $CLICKUP_API_TOKEN" \                    
+      308 -  -H "Content-Type: application/json" \                       
+      309 -  -d "$(jq -n --arg content "$CLICKUP_MESSAGE" '{"content": $c
+          -ontent}')")                                                   
+      311 +  CLICKUP_RESPONSE=$(curl -s -X POST "https://api.clickup.com/
+          +api/v3/workspaces/${CLICKUP_WORKSPACE_ID}/chat/channels/${CLIC
+          +KUP_CHANNEL_ID}/messages" \                                   
+      312 +    -H "Authorization: $CLICKUP_API_TOKEN" \                  
+      313 +    -H "Content-Type: application/json" \                     
+      314 +    -d "$(jq -n --arg content "$CLICKUP_MESSAGE" '{"content": 
+          +$content}')")                                                 
+      315  
+      311 -# Check if post was successful                                
+      312 -if echo "$CLICKUP_RESPONSE" | jq -e '.id' > /dev/null 2>&1; th
+          -en                                                            
+      313 -  echo "✅ Posted to ClickUp #Scraping channel successfully!" 
+      314 -else                                                          
+      315 -  echo "❌ Failed to post to ClickUp:"                        
+      316 -  echo "$CLICKUP_RESPONSE" | jq                               
+      316 +  if echo "$CLICKUP_RESPONSE" | jq -e '.id' > /dev/null 2>&1; 
+          +then                                                          
+      317 +    echo "✅ Posted to ClickUp #Scraping channel successfully!
+          +"                                                             
+      318 +  else                                                        
+      319 +    echo "❌ Failed to post to ClickUp:"                      
+      320 +    echo "$CLICKUP_RESPONSE" | jq                             
+      321 +  fi                                                          
+      322  fi
+  ⎿  Running PostToolUse hooks… (1/7 done)
+
+⏺ Let me test the raw output mode.
+
+⏺ Bash(/Users/dikson/Work/second_brain/asana_daily_summary.sh --help)
+  ⎿ Usage: /Users/dikson/Work/second_brain/asana_daily_summary.sh        
+    [OPTIONS]
+
+    Options:
+    … +14 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Bash(/Users/dikson/Work/second_brain/asana_daily_summary.sh 2>&1 | tail -30)
+  ⎿  🚨 OVERDUE TASKS                                                   
+     • QualCare (QA Fixes in Progress) - 11 days overdue → ⚠️ Unassigned
+     • BCBS MT (QA Error) - 9 days overdue → Pramod Phuyal
+     … +31 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Done. Updated script with options:
+
+  ./asana_daily_summary.sh              # Raw report only (default)
+  ./asana_daily_summary.sh -p           # Raw + Claude post-processing
+  ./asana_daily_summary.sh -c           # Raw + post to ClickUp
+  ./asana_daily_summary.sh -a           # Raw + process + ClickUp
+  ./asana_daily_summary.sh --help       # Show help
+
+✻ Worked for 1m 45s
+
+❯ Update the Claude prompt to keep it simple:                               
+  📊 Ideon Scraping Internal - Daily Summary                                
+  Generated: Jan 13, 2026 05:47                                             
+  Period: Last 24 hours                                                     
+                                                                            
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━              
+                                                                            
+  ✅ COMPLETED/APPROVED                                                     
+  • Baylor Scott and White → Internal Approved (Rohit Dangol)               
+  • BCBS IL → Approved (Dikson Rajbanshi)                                   
+  • BCBS IL → Submitted (Dikson Rajbanshi)                                  
+  • BCBS IL → Submitted (Rohit Dangol)                                      
+  • BCBS TX → Internal Approved (Rohit Dangol)                              
+  • BCBS TX → Submitted (Dikson Rajbanshi)                                  
+  • BCBS TX → Submitted (Rohit Dangol)                                      
+  • Braven Health → Approved (Dikson Rajbanshi)                             
+  • Christus Health Plan → Approved (Dikson Rajbanshi)                      
+  • Christus Health Plan → Internal Approved (Rohit Dangol)                 
+  • Christus Health Plan → Submitted (Dikson Rajbanshi)                     
+  • Christus Health Plan → Submitted (Rohit Dangol)                         
+  • Medica Mayo Medical → Approved (Dikson Rajbanshi)                       
+  • Medica Mayo Medical → Internal Approved (Rohit Dangol)                  
+  • Medica Mayo Medical → Submitted (Dikson Rajbanshi)                      
+  • Medica Mayo Medical → Submitted (Rohit Dangol)                          
+  • NC Medicaid → Approved (Dikson Rajbanshi)                               
+  • UCLA Health → Approved (Dikson Rajbanshi)                               
+  • UCLA Health → Submitted (Dikson Rajbanshi)                              
+  • UCLA Health → Submitted (Rohit Dangol)                                  
+                                                                            
+  🔄 PROGRESSING                                                            
+  • Anthem → Scraping (Dikson Rajbanshi)                                    
+  • Anthem → Scraping (Rohit Dangol)                                        
+  • BCBS MA → QA (Dikson Rajbanshi)                                         
+  • Mainecare - Medicaid site → Scraping (Dikson Rajbanshi)                 
+  • Mainecare - Medicaid site → Scraping (Rohit Dangol)                     
+  • UPMC → Coding (Asim Adhikari)                                           
+                                                                            
+  ⚠️  ISSUES FOUND                                                          
+  • Aetna Better Health of Oklahoma → Scrape Error (Rohit Dangol)           
+  • Baylor Scott and White → QA Error (Asim Adhikari)                       
+  • BCBS TX → QA Error (Asim Adhikari)                                      
+  • BCBS TX → QA Error (Rohit Dangol)                                       
+  • Emblem Health → Scrape Error (Dikson Rajbanshi)                         
+                                                                            
+  🔧 FIXES IN PROGRESS                                                      
+  • BCBS TX → Internal Approved (Rohit Dangol)                              
+  • Mainecare - Medicaid site → Scraping (Rohit Dangol)                     
+                                                                            
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━              
+                                                                            
+  🚨 OVERDUE TASKS                                                          
+  • QualCare (QA Fixes in Progress) - 11 days overdue → ⚠️ Unassigned       
+  • BCBS MT (QA Error) - 9 days overdue → Pramod Phuyal                     
+  • Independence (Scraping) - 3 days overdue → Pramod Phuyal                
+  • CareFirst (Scraping) - 3 days overdue → Dikson Rajbanshi                
+  • Sentara Health Plans (Scraping) - 2 days overdue → Pramod Phuyal        
+  • Aetna Better Health of Oklahoma (Scrape Error) - 2 days overdue →       
+  Pramod Phuyal                                                             
+                                                                            
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━              
+                                                                            
+  📋 WORKLOAD DISTRIBUTION (Active Tasks)                                   
+                                                                            
+  Assignee             │ Tasks │ Breakdown                                  
+  ─────────────────────┼───────┼─────────────────────────────────           
+  ⚠️ Unassigned    │     7 │ 1 Coding, 1 QA Fixes in Progress, 3            
+  Scraping, 2 Submitted                                                     
+  Pramod Phuyal        │     6 │ 2 QA Error, 2 Scrape Error, 2 Scraping     
+  Dikson Rajbanshi     │     2 │ 1 Coding, 1 Scraping                       
+  Rohit Dangol         │     1 │ 1 QA                                       
+                                                                            
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━              
+                                                                            
+  👥 USER ACTIVITY (Last 24h)                                               
+  Dikson Rajbanshi      48 actions                                          
+  Rohit Dangol          33 actions                                          
+  Asim Adhikari         10 actions                                          
+  Pramod Phuyal          1 actions                                          
+                                                                            
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━              
+  ❯ git init in this format instead of createing tables. Also, add          
+  timestamp to the generated time                                           
+
+⏺ Update(asana_daily_summary.sh)
+  ⎿  Added 1 line, removed 1 line                                        
+      79  # Function to generate raw report
+      80  generate_raw_report() {
+      81  echo "📊 Ideon Scraping Internal - Daily Summary"
+      82 -echo "   Generated: $(date '+%b %d, %Y %H:%M')"                
+      82 +echo "   Generated: $(date '+%b %d, %Y %H:%M:%S')"             
+      83  echo "   Period: Last 24 hours"
+      84  echo ""
+      85  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          ━━━"
+  ⎿  Running PostToolUse hooks… (1/7 done)
+
+⏺ Update(asana_daily_summary.sh)
+  ⎿  Added 8 lines, removed 9 lines                                      
+      276    echo "🤖 Post-processing with Claude..."
+      277    echo ""
+      278  
+      279 -  claude -p "You are summarizing an Asana daily report. Clean 
+          -up this report and format it as a clean markdown document:    
+      279 +  claude -p "Clean up this Asana daily report by deduplicating
+          + entries. Keep the EXACT same format (bullet points, not table
+          +s).                                                           
+      280  
+      281 -1. Remove duplicate entries (same task appearing multiple time
+          -s with different users - keep only the most significant action
+          -)                                                             
+      282 -2. Deduplicate tasks that appear in multiple sections (if a ta
+          -sk went through multiple stages, show only the final state rea
+          -ched today)                                                   
+      283 -3. Format as clean markdown with proper headers               
+      284 -4. Add a brief executive summary at the top (2-3 sentences hig
+          -hlighting key points)                                         
+      285 -5. Keep all the sections but make them cleaner                
+      286 -6. Ensure overdue tasks are clearly highlighted               
+      287 -7. Add any actionable insights at the bottom                  
+      281 +Rules:                                                        
+      282 +1. Remove duplicate entries - if same task appears multiple ti
+          +mes, keep only the final/most significant state               
+      283 +2. If a task went through multiple stages today, show only the
+          + final state reached                                          
+      284 +3. Keep all sections and formatting exactly as-is (emojis, sep
+          +arators, bullet format)                                       
+      285 +4. Do NOT convert to tables - keep bullet point format        
+      286 +5. Do NOT add executive summary or insights - just dedupe     
+      287  
+      288  Here's the raw report:
+      289  
+      290  $(cat "$TMP_DIR/raw_output.txt")
+      291  
+      293 -Output clean markdown only, no explanations." --output-format 
+          -text > "$OUTPUT_FILE"                                         
+      292 +Output the cleaned report only, same format." --output-format 
+          +text > "$OUTPUT_FILE"                                         
+      293  
+      294    echo "✅ Processed summary saved to: $OUTPUT_FILE"
+      295    echo ""
+  ⎿  Running PostToolUse hooks… (1/7 done)
+
+⏺ Bash(/Users/dikson/Work/second_brain/asana_daily_summary.sh -p     timeout: 3m 
+      2>&1 | tail -80)                                               0s
+
+  ⎿     Dikson Rajbanshi     │     2 │ 1 Coding, 1 Scraping
+        Rohit Dangol         │     1 │ 1 QA
+     … +82 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Done. Now with -p:
+  - Same bullet format (no tables)
+  - Deduped entries (20 → 8 completed, 6 → 4 progressing, 5 → 3 issues)
+  - Timestamp with seconds: Jan 13, 2026 06:02:55
+
+✻ Baked for 1m 41s
+
+❯ set up cron to run daily at 8am. This includes posting to clickup with    
+  the -a args.                                                              
+
+⏺ Bash(# Create a wrapper script that sets up environment properly for cron
+      cat > /Users/dikson/Work/second_brain/asana_daily_summary_cron.sh <<
+      'EOF'…)
+  ⎿  (No content)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Bash(# Show current crontab
+      echo "Current crontab:"…)
+  ⎿  Current crontab:             
+     (empty)
+     … +2 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Should I add this cron job to run daily at 8am?
+
+  0 8 * * * /Users/dikson/Work/second_brain/asana_daily_summary_cron.sh
+
+  This will:
+  - Run at 8:00 AM every day
+  - Post-process with Claude (-p)
+  - Post to ClickUp #Scraping (-c)
+  - Log output to asana_daily_summary/cron.log
+
+❯ yes. Add a readme.md file with all the information needed. Before this,   
+  move the asana and clickup skill to the project to make them project      
+  specific skills.                                                          
+
+⏺ Bash(# Create project-specific skills directory and copy skills
+      mkdir -p /Users/dikson/Work/second_brain/.claude/skills…)
+  ⎿  Skills copied:                                 
+     total 0
+     drwxr-xr-x  4 dikson  staff  128 Jan 13 06:11 .
+     … +3 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Bash(# Add cron job
+      (crontab -l 2>/dev/null; echo "0 8 * * *
+      /Users/dikson/Work/second_brain/asana_daily_summary_cron.sh") | crontab
+      -…)
+  ⎿ Cron job added. Current crontab:                                     
+    0 8 * * * /Users/dikson/Work/second_brain/asana_daily_summary_cron.sh
+
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Write(README.md)
+  ⎿  Wrote 199 lines to README.md                                        
+      1 # Asana Daily Summary
+      2 Automated daily summary generator for the **Ideon Scraping Intern
+        al** Asana board with optional Claude post-processing and ClickUp
+         integration.
+      3 ## Quick Start
+      4 ```bash
+      5 # Raw report only (default)
+      6 ./asana_daily_summary.sh
+     … +189 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/8 done)
+
+⏺ Done. Summary of changes:
+
+  1. Skills moved to project:
+  .claude/skills/
+  ├── asana/      # Asana API skill
+  └── clickup/    # ClickUp API skill
+
+  2. Cron job added (8am daily):
+  0 8 * * * /Users/dikson/Work/second_brain/asana_daily_summary_cron.sh
+
+  3. README.md created with:
+  - Quick start commands
+  - Sample output
+  - Section descriptions
+  - Cron management
+  - Configuration (env vars, IDs)
+  - File structure
+  - Troubleshooting
+
+  Files:
+  second_brain/
+  ├── asana_daily_summary.sh          # Main script
+  ├── asana_daily_summary_cron.sh     # Cron wrapper
+  ├── asana_daily_summary/            # Output directory
+  ├── .claude/skills/                 # Project-specific skills
+  └── README.md                       # Documentation
+
+✻ Crunched for 49s
+
+❯ git commit 
+
+⏺ Skill(commit)
+  ⎿  Successfully loaded skill
+
+⏺ Bash(git status)
+  ⎿  On branch master              
+
+     No commits yet
+     … +13 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Bash(git diff --stat 2>/dev/null; echo "---"; ls -la)
+  ⎿  ---                                               
+     total 120
+     drwxr-xr-x  10 dikson  staff    320 Jan 13 06:11 .
+     … +10 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Bash(find . -type f -not -path './.git/*' -not -name '.DS_Store' | head -30)
+  ⎿  ./setup_mcp.sh                     
+     ./asana_daily_summary_cron.sh
+     ./asana_daily_summary/2026-01-13.md
+     … +9 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Bash(cat .gitignore 2>/dev/null || echo "(no .gitignore exists)")
+  ⎿  (no .gitignore exists)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ I'll create a .gitignore first, then commit everything. Here's my plan:
+
+  Commit 1 (Initial commit):
+
+  Files to add:
+  - .gitignore (new - excludes cache/system files)
+  - asana_daily_summary.sh - Main script
+  - asana_daily_summary_cron.sh - Cron wrapper
+  - asana_daily_summary/2026-01-13.md - Sample output
+  - .claude/skills/asana/SKILL.md - Asana API skill
+  - .claude/skills/clickup/SKILL.md - ClickUp API skill
+  - .claude/skills/clickup/scripts/clickup_api.py - ClickUp helper script
+  - README.md - Documentation
+
+  Excluded:
+  - .DS_Store (system)
+  - .claude/tsc-cache/ (cache)
+  - setup_mcp.sh (unrelated to this feature)
+
+  Commit message:
+  Add Asana daily summary automation with ClickUp integration
+
+  - Automated daily summary for Ideon Scraping Internal board
+  - Tracks completed/approved tasks, progress, issues, fixes
+  - Shows overdue tasks with days count and workload distribution
+  - Optional Claude post-processing for deduplication (-p flag)
+  - Optional ClickUp #Scraping channel posting (-c flag)
+  - Cron job configured for 8am daily runs
+  - Project-specific Asana and ClickUp API skills included
+
+  Shall I proceed?
+
+✻ Churned for 40s
+
+❯ yes 
+
+⏺ Write(.gitignore)
+  ⎿  Wrote 16 lines to .gitignore              
+      1 # System files
+      2 .DS_Store
+      3 *.swp
+      4 *.swo
+      5 # Cache
+      6 .claude/tsc-cache/
+      7 # Logs (keep structure, ignore content)
+      8 asana_daily_summary/cron.log
+     … +6 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/8 done)
+
+⏺ Bash(git add .gitignore README.md asana_daily_summary.sh
+      asana_daily_summary_cron.sh asana_daily_summary/2026-01-13.md
+      .claude/skills/asana/SKILL.md .claude/skills/c…)
+  ⎿  On branch master              
+
+     No commits yet
+     … +15 lines (ctrl+o to expand)
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Bash(git commit -m "Add Asana daily summary automation with ClickUp
+      integration…)
+  ⎿ [master (root-commit) 929f7f8] Add Asana daily summary automation wit
+    ClickUp integration
+     8 files changed, 2512 insertions(+)
+    … +8 lines (ctrl+o to expand)
+
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Bash(git log --oneline -n 1)
+  ⎿  929f7f8 Add Asana daily summary automation with ClickUp integration
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Bash(if [ -f "$CLAUDE_PROJECT_DIR/.claude/scripts/generate-reasoning.sh" ];
+      then
+        bash "$CLAUDE_PROJECT_DIR/.claude/scripts/generate-reasoning.sh"
+      "929f7f8" "Add As…)
+  ⎿  Reasoning script not found, skipping
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Done.
+
+  929f7f8 Add Asana daily summary automation with ClickUp integration
+
+  8 files committed:
+  - .gitignore
+  - README.md
+  - asana_daily_summary.sh
+  - asana_daily_summary_cron.sh
+  - asana_daily_summary/2026-01-13.md
+  - .claude/skills/asana/SKILL.md
+  - .claude/skills/clickup/SKILL.md
+  - .claude/skills/clickup/scripts/clickup_api.py
+
+✻ Cogitated for 42s
+
+❯ add the setup_mcp.sh script as well 
+
+⏺ Bash(git add setup_mcp.sh && git commit -m "Add MCP setup script")
+  ⎿  [master 411fd55] Add MCP setup script
+      1 file changed, 661 insertions(+)
+      create mode 100755 setup_mcp.sh
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Bash(git log --oneline -n 2)
+  ⎿  411fd55 Add MCP setup script                                       
+     929f7f8 Add Asana daily summary automation with ClickUp integration
+  ⎿  Running PostToolUse hooks… (1/3 done)
+
+⏺ Done.
+
+  411fd55 Add MCP setup script
+  929f7f8 Add Asana daily summary automation with ClickUp integration
+
+
+
