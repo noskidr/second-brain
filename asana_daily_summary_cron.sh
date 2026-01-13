@@ -2,8 +2,10 @@
 # Cron wrapper for asana_daily_summary.sh
 # Loads environment and runs with all options
 
-# Load environment variables
+# Load environment variables (set -a auto-exports all sourced vars)
+set -a
 source ~/.claude/.env 2>/dev/null || true
+set +a
 source ~/.zshrc 2>/dev/null || true
 
 # Ensure PATH includes common locations

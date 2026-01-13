@@ -276,20 +276,18 @@ if [ "$POST_PROCESS" = true ]; then
   echo "🤖 Post-processing with Claude..."
   echo ""
 
-  claude -p "Clean up this Asana daily report by deduplicating entries. Keep the EXACT same format (bullet points, not tables).
+  claude -p "Clean up this Asana daily report by deduplicating entries.
 
 Rules:
 1. Remove duplicate entries - if same task appears multiple times, keep only the final/most significant state
 2. If a task went through multiple stages today, show only the final state reached
-3. Keep all sections and formatting exactly as-is (emojis, separators, bullet format)
-4. Do NOT convert to tables - keep bullet point format
-5. Do NOT add executive summary or insights - just dedupe
+3. Do NOT convert to tables
+4. Output ONLY the cleaned report - no explanations, no 'Changes made', no commentary, no preamble
+5. Add a summary of the report at the end with key actions and insights.
 
-Here's the raw report:
+Raw report:
 
-$(cat "$TMP_DIR/raw_output.txt")
-
-Output the cleaned report only, same format." --output-format text > "$OUTPUT_FILE"
+$(cat "$TMP_DIR/raw_output.txt")" --output-format text > "$OUTPUT_FILE"
 
   echo "✅ Processed summary saved to: $OUTPUT_FILE"
   echo ""
